@@ -22,6 +22,10 @@ export default function Home() {
 			)[0] as HTMLInputElement;
 			const value = input.value;
 
+			if (!value) {
+				return;
+			}
+
 			const lowerCaseInput = value.toLowerCase();
 			const isCorrect = item.item.meaning.some(
 				(w) => w.toLowerCase() === lowerCaseInput
