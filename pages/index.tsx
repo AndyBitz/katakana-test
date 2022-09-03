@@ -1,5 +1,5 @@
 import cn from 'classnames';
-import { FormEvent, useCallback, useState } from 'react';
+import { FormEvent, useCallback, useEffect, useState } from 'react';
 import { Layout } from '../components/layout';
 import { Link } from '../components/link';
 import { list } from '../data/list';
@@ -8,6 +8,11 @@ export default function Home() {
 	const item = useItem();
 	const [state, setState] = useState<'correct' | 'error' | null>(null);
 	const [showInfo, setShowInfo] = useState(false);
+
+	useEffect(() => {
+		// Start with a random word.
+		item.next();
+	}, []);
 
 	const onSubmit = useCallback(
 		(event: FormEvent<HTMLFormElement>) => {
@@ -140,8 +145,7 @@ function useItem() {
 	const [index, setIndex] = useState(0);
 
 	const next = useCallback(() => {
-		const rnd = Math.floor(Math.random() * list.length);
-		setIndex(rnd);
+		setIndex(Math.floor(Math.random() * list.length));
 	}, [setIndex]);
 
 	const item = list[index];
