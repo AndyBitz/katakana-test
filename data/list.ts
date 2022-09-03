@@ -156,13 +156,13 @@ export const list = [
 	{
 		romaji: "gasorin sutando",
 		katakana: "ガソリンスタンド",
-		meaning: ["petrol station"],
+		meaning: ["petrol station", "gas station"],
 		level: "N4",
 	},
 	{
 		romaji: "gasu",
 		katakana: "ガス",
-		meaning: ["petrol"],
+		meaning: ["petrol", "gas"],
 		level: "N4",
 	},
 	{
