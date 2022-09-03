@@ -39,7 +39,7 @@ export default function Home() {
 					item.next();
 					input.focus();
 					setShowInfo(false);
-				}, 1500) as number;
+				}, 500) as number;
 			} else {
 				setState('error');
 			}
