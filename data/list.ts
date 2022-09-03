@@ -96,7 +96,7 @@ export const list = [
 	{
 		romaji: "chekku",
 		katakana: "チェック",
-		meaning: ["to check"],
+		meaning: ["to check", "check"],
 		level: "N4",
 	},
 	{
