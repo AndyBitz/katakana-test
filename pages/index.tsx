@@ -119,7 +119,7 @@ export default function Home() {
 					}}
 					className="bg-slate-200 p-1 text-center min-w-full mb-2"
 				>
-					Info
+					Word Info
 				</button>
 
 				<div
