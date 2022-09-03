@@ -39,7 +39,7 @@ export default function Home() {
 					item.next();
 					input.focus();
 					setShowInfo(false);
-				}, 500) as number;
+				}, 500);
 			} else {
 				setState('error');
 			}
@@ -54,7 +54,9 @@ export default function Home() {
 	return (
 		<Layout>
 			<div className="text-center bg-rose-400 py-16">
-				<div className="text-5xl text-white">{item.isReady ? item.item.katakana : <>&nbsp;</>}</div>
+				<div className="text-5xl text-white">
+					{item.isReady ? item.item.katakana : <>&nbsp;</>}
+				</div>
 			</div>
 
 			<div className="p-4">
@@ -62,14 +64,13 @@ export default function Home() {
 					onSubmit={onSubmit}
 					className={cn('mb-4', {
 						'bg-red-500': state === 'error',
-						'bg-green-500': state === 'correct',
+						'bg-green-600': state === 'correct',
 						'text-white': state === 'error' || state === 'correct',
 					})}
 				>
 					<div
 						className={cn(
-							'flex border-2 border-slate-200 text-lg px-4 focus-within:border-slate-400',
-							{}
+							'flex border-2 border-slate-200 text-lg px-4'
 						)}
 					>
 						<div className="px-2 w-6" />
