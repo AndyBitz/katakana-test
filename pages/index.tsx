@@ -9,11 +9,6 @@ export default function Home() {
 	const [state, setState] = useState<'correct' | 'error' | null>(null);
 	const [showInfo, setShowInfo] = useState(false);
 
-	useEffect(() => {
-		// Start with a random word.
-		item.next();
-	}, []);
-
 	const onSubmit = useCallback(
 		(event: FormEvent<HTMLFormElement>) => {
 			event.preventDefault();
@@ -59,7 +54,7 @@ export default function Home() {
 	return (
 		<Layout>
 			<div className="text-center bg-rose-400 py-16">
-				<div className="text-5xl text-white">{item.item.katakana}</div>
+				<div className="text-5xl text-white">{item.isReady ? item.item.katakana : null}</div>
 			</div>
 
 			<div className="p-4">
@@ -143,6 +138,7 @@ export default function Home() {
 
 function useItem() {
 	const [index, setIndex] = useState(0);
+	const [ready, setReady] = useState(false);
 
 	const next = useCallback(() => {
 		setIndex(Math.floor(Math.random() * list.length));
@@ -150,8 +146,14 @@ function useItem() {
 
 	const item = list[index];
 
+	useEffect(() => {
+		next();
+		setReady(true);
+	}, [next, setReady]);
+
 	return {
 		item,
 		next,
+		isReady: ready,
 	};
 }
