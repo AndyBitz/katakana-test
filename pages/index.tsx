@@ -1,7 +1,6 @@
 import cn from 'classnames';
 import { FormEvent, useCallback, useEffect, useState } from 'react';
 import { Layout } from '../components/layout';
-import { Link } from '../components/link';
 import { list } from '../data/list';
 
 export default function Home() {
@@ -100,7 +99,7 @@ export default function Home() {
 
 				<div
 					className={cn('bg-slate-100 px-4 py-2 min-w-full', {
-						hidden: !showInfo,
+						invisible: !showInfo,
 					})}
 				>
 					<p>Meaning: {item.item.meaning.join('; ')}</p>
@@ -108,28 +107,6 @@ export default function Home() {
 					<p>Level: {item.item.level}</p>
 				</div>
 			</div>
-
-			<footer className="absolute bottom-0 left-0">
-				<div className="p-6 flex gap-6">
-					<div>
-						Made by{' '}
-						<Link href="https://andybitz.io/" target="_blank">
-							Andy
-						</Link>
-						.
-					</div>
-					<div>
-						Add more words on{' '}
-						<Link
-							href="https://github.com/AndyBitz/katakana-test"
-							target="_blank"
-						>
-							GitHub
-						</Link>
-						.
-					</div>
-				</div>
-			</footer>
 		</Layout>
 	);
 }
@@ -144,6 +121,7 @@ function useItem() {
 
 	const item = list[index];
 
+	// Start with a random word.
 	useEffect(() => {
 		next();
 		setReady(true);

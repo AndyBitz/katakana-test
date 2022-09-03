@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
 import Head from 'next/head';
+import { Footer } from './footer';
 
 export function Layout({
 	title,
@@ -9,12 +10,17 @@ export function Layout({
 	children: ReactNode;
 }) {
 	return (
-		<main className="relative" style={{ minHeight: '30rem', height: '100vh' }}>
+		<main className='flex flex-col h-screen justify-between'>
 			<Head>
 				<title>{title || 'Katakana Test'}</title>
 				<link rel="icon" type="image/png" href="/ka-icon.png?v=1" />
 			</Head>
-			{children}
+
+			<div>
+				{children}
+			</div>
+
+			<Footer />
 		</main>
 	);
 }
