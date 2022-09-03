@@ -54,7 +54,7 @@ export default function Home() {
 	return (
 		<Layout>
 			<div className="text-center bg-rose-400 py-16">
-				<div className="text-5xl text-white">{item.isReady ? item.item.katakana : null}</div>
+				<div className="text-5xl text-white">{item.isReady ? item.item.katakana : <>&nbsp;</>}</div>
 			</div>
 
 			<div className="p-4">
