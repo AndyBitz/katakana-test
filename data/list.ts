@@ -288,7 +288,7 @@ export const list = [
 	{
 		romaji: "koppu",
 		katakana: "コップ",
-		meaning: ["glass (drinking vessel)", "tumbler​"],
+		meaning: ["glass", "glass (drinking vessel)", "tumbler"],
 		level: "N5",
 	},
 	{
