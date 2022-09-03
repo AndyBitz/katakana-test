@@ -26,7 +26,7 @@ export default function Home() {
 				return;
 			}
 
-			const value = input.value;
+			const value = input.value.trim();
 			if (!value) {
 				return;
 			}

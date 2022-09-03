@@ -9,7 +9,7 @@ export function Layout({
 	children: ReactNode;
 }) {
 	return (
-		<main>
+		<main className="relative" style={{ minHeight: '40rem', height: '100vh' }}>
 			<Head>
 				<title>{title || 'Katakana Test'}</title>
 				<link rel="icon" type="image/png" href="/ka-icon.png?v=1" />
