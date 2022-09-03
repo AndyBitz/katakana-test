@@ -1,5 +1,6 @@
 import cn from 'classnames';
-import { FormEvent, useCallback, useEffect, useState } from 'react';
+import levensheitn from 'fast-levenshtein';
+import { FormEvent, useCallback, useEffect, useRef, useState } from 'react';
 import { Layout } from '../components/layout';
 import { list } from '../data/list';
 
@@ -7,6 +8,8 @@ export default function Home() {
 	const item = useItem();
 	const [state, setState] = useState<'correct' | 'error' | null>(null);
 	const [showInfo, setShowInfo] = useState(false);
+	const [isOff, setIsOff] = useState(false);
+	const inputRef = useRef<HTMLInputElement>(null);
 
 	const onSubmit = useCallback(
 		(event: FormEvent<HTMLFormElement>) => {
@@ -19,6 +22,7 @@ export default function Home() {
 			if (state === 'correct') {
 				setState(null);
 				setShowInfo(false);
+				setIsOff(false);
 				input.focus();
 				input.value = '';
 				item.next();
@@ -30,18 +34,21 @@ export default function Home() {
 				return;
 			}
 
-			const lowerCaseInput = value.toLowerCase();
-			const isCorrect = item.item.meaning.some(
-				(w) => w.toLowerCase() === lowerCaseInput
-			);
+			const lowerValue = value.toLowerCase();
+			const [distance] = item.item.meaning.map(
+				(w) => levensheitn.get(w.toLowerCase(), lowerValue)
+			).sort();
 
-			if (isCorrect) {
+			if (distance < 2) {
 				setState('correct');
+				if (distance > 0) {
+					setIsOff(true);
+				}
 			} else {
 				setState('error');
 			}
 		},
-		[item, setState, setShowInfo]
+		[item, setState, setShowInfo, setIsOff]
 	);
 
 	return (
@@ -71,6 +78,7 @@ export default function Home() {
 					>
 						<div className="px-2 w-6" />
 						<input
+							ref={inputRef}
 							className={cn(
 								'text-center outline-0 bg-inherit flex-grow py-2 font-normal',
 								{
@@ -90,8 +98,17 @@ export default function Home() {
 					</div>
 				</form>
 
+				{isOff ? (
+					<div className='text-center pb-4 text-sm'>
+						Your answer was slightly off.
+					</div>
+				) : null}
+
 				<button
-					onClick={() => setShowInfo((x) => !x)}
+					onClick={() => {
+						setShowInfo((x) => !x);
+						inputRef?.current?.focus();
+					}}
 					className="bg-slate-200 p-1 text-center min-w-full mb-2"
 				>
 					Info
