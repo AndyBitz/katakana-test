@@ -2,7 +2,7 @@ import cn from 'classnames';
 import { FormEvent, useCallback, useState } from 'react';
 import { Layout } from '../components/layout';
 import { Link } from '../components/link';
-import { list } from '../list';
+import { list } from '../data/list';
 
 export default function Home() {
 	const item = useItem();
