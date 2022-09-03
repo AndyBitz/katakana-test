@@ -13,15 +13,20 @@ export default function Home() {
 		(event: FormEvent<HTMLFormElement>) => {
 			event.preventDefault();
 
-			if (state === 'correct') {
-				return;
-			}
-
 			const input = (
 				event.target as unknown as HTMLInputElement[]
 			)[0] as HTMLInputElement;
-			const value = input.value;
 
+			if (state === 'correct') {
+				setState(null);
+				setShowInfo(false);
+				input.focus();
+				input.value = '';
+				item.next();
+				return;
+			}
+
+			const value = input.value;
 			if (!value) {
 				return;
 			}
@@ -31,26 +36,11 @@ export default function Home() {
 				(w) => w.toLowerCase() === lowerCaseInput
 			);
 
-			let timeout: number | null = null;
-
 			if (isCorrect) {
 				setState('correct');
-
-				// @ts-ignore
-				timeout = setTimeout(() => {
-					input.value = '';
-					setState(null);
-					item.next();
-					input.focus();
-					setShowInfo(false);
-				}, 500);
 			} else {
 				setState('error');
 			}
-
-			return () => {
-				clearTimeout(timeout as number);
-			};
 		},
 		[item, setState, setShowInfo]
 	);
@@ -74,13 +64,16 @@ export default function Home() {
 				>
 					<div
 						className={cn(
-							'flex border-2 border-slate-200 text-lg px-4'
+							'flex border-2 border-slate-200 text-lg px-4', {
+								'border-red-500': state === 'error',
+								'border-green-600': state === 'correct',
+							}
 						)}
 					>
 						<div className="px-2 w-6" />
 						<input
 							className={cn(
-								'text-center outline-0 bg-inherit flex-grow py-2',
+								'text-center outline-0 bg-inherit flex-grow py-2 font-normal',
 								{
 									'placeholder:text-slate-400':
 										state === 'error',
@@ -110,8 +103,8 @@ export default function Home() {
 						hidden: !showInfo,
 					})}
 				>
-					<p>Rōmaji: {item.item.romaji}</p>
 					<p>Meaning: {item.item.meaning.join('; ')}</p>
+					<p>Rōmaji: {item.item.romaji}</p>
 					<p>Level: {item.item.level}</p>
 				</div>
 			</div>
