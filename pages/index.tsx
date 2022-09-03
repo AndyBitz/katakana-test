@@ -1,6 +1,6 @@
 import cn from 'classnames';
 import levensheitn from 'fast-levenshtein';
-import { FormEvent, useCallback, useEffect, useRef, useState } from 'react';
+import { FormEvent, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Layout } from '../components/layout';
 import { list } from '../data/list';
 
@@ -14,6 +14,10 @@ export default function Home() {
 	const onSubmit = useCallback(
 		(event: FormEvent<HTMLFormElement>) => {
 			event.preventDefault();
+
+			if (!item.item) {
+				return;
+			}
 
 			const input = (
 				event.target as unknown as HTMLInputElement[]
@@ -53,9 +57,13 @@ export default function Home() {
 
 	return (
 		<Layout>
-			<div className="text-center bg-rose-400 py-16">
+			<div className="relative text-center bg-rose-400 py-16">
 				<div className="text-5xl text-white">
-					{item.isReady ? item.item.katakana : <>&nbsp;</>}
+					{item.item ? item.item.katakana : <>&nbsp;</>}
+				</div>
+
+				<div className='absolute top-4 right-4 text-sm text-white'>
+					{item.index + 1} / {item.total}
 				</div>
 			</div>
 
@@ -119,32 +127,58 @@ export default function Home() {
 						invisible: !showInfo,
 					})}
 				>
-					<p>Meaning: {item.item.meaning.join('; ')}</p>
-					<p>Rōmaji: {item.item.romaji}</p>
-					<p>Level: {item.item.level}</p>
+					{item.item ? (
+						<>
+							<p>Meaning: {item.item.meaning.join('; ')}</p>
+							<p>Rōmaji: {item.item.romaji}</p>
+							<p>Level: {item.item.level}</p>
+						</>
+					) : null}
 				</div>
 			</div>
 		</Layout>
 	);
 }
 
+function generateList() {
+	const copy = JSON.parse(JSON.stringify(list)) as typeof list;
+
+	// Shuffle the list so that each list will be random.
+	for (let i = 0; i < copy.length; i++) {
+		const rnd = Math.floor(Math.random() * copy.length);
+		const tmp = copy[i];
+		copy[i] = copy[rnd];
+		copy[rnd] = tmp;
+	}
+
+	return copy;
+}
+
 function useItem() {
+	const list = useMemo(() => generateList(), []);
+
 	const [index, setIndex] = useState(0);
 	const [ready, setReady] = useState(false);
 
 	const next = useCallback(() => {
-		setIndex(Math.floor(Math.random() * list.length));
-	}, [setIndex]);
+		setIndex((curr) => {
+			const inc = curr + 1;
+			return inc % list.length;
+		});
+	}, [list, setIndex]);
 
-	const item = list[index];
-
-	// Start with a random word.
+	// Since we start with a random word,
+	// the server and client render will be different
+	// so avoid rendering while not ready.
 	useEffect(() => {
-		next();
 		setReady(true);
 	}, [next, setReady]);
 
+	const item = ready ? list[index] : null;
+
 	return {
+		index,
+		total: list.length,
 		item,
 		next,
 		isReady: ready,
