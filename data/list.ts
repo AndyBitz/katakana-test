@@ -144,7 +144,7 @@ export const list = [
 	{
 		romaji: "garasu",
 		katakana: "ガラス",
-		meaning: ["a glass"],
+		meaning: ["a glass", "glass"],
 		level: "N4",
 	},
 	{
