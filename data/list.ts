@@ -609,4 +609,136 @@ export const list = [
 		meaning: ["trousers", "pants"],
 		level: "N5",
 	},
+	{
+		romaji: "ankeeto",
+		katakana: "アンケート",
+		meaning: ["questionnaire", "questionary", "work sheet"],
+		level: 'unknown',
+	},
+	{
+		romanji: "tesuto",
+		katakana: "テスト",
+		meaning: ["test"],
+		level: "unknown"
+	},
+	{
+		romanji: "toreeningu",
+		katakana: "トレーニング",
+		meaning: ["training"],
+		level: "unknown"
+	},
+	{
+		romanji: "okkee",
+		katakana: "オッケー",
+		meaning: ["okay"],
+		level: "unknown"
+	},
+	{
+		romanji: "kuji",
+		katakana: "クジ",
+		meaning: ["lottery"],
+		level: "unknown"
+	},
+	{
+		romanji: "roon",
+		katakana: "ローン",
+		meaning: ["loan"],
+		level: "unknown"
+	},
+	{
+		romanji: "deeta",
+		katakana: "データ",
+		meaning: ["data"],
+		level: "unknown"
+	},
+	{
+		romanji: "wakuchin",
+		katakana: "ワクチン",
+		meaning: ["vaccination", "vaccine"],
+		level: "unknown"
+	},
+	{
+		romanji: "patapata",
+		katakana: "パタパタ",
+		meaning: ["pitter-patter", "pitter patter", "bird wing flapping"],
+		level: "unknown"
+	},
+	{
+		romanji: "chansu",
+		katakana: "チャンス",
+		meaning: ["chance"],
+		level: "unknown"
+	},
+	{
+		romanji: "baransu",
+		katakana: "バランス",
+		meaning: ["balance"],
+		level: "unknown"
+	},
+	{
+		romanji: "suteeki",
+		katakana: "ステーキ",
+		meaning: ["steak"],
+		level: "unknown"
+	},
+	{
+		romanji: "janru",
+		katakana: "ジャンル",
+		meaning: ["genre"],
+		level: "unknown"
+	},
+	{
+		romanji: "taipu",
+		katakana: "タイプ",
+		meaning: ["type"],
+		level: "unknown"
+	},
+	{
+		romanji: "baggu",
+		katakana: "バッグ",
+		meaning: ["bag", "purse"],
+		level: "unknown"
+	},
+	{
+		romanji: "ferii",
+		katakana: "フェリー",
+		meaning: ["ferry"],
+		level: "unknown"
+	},
+	{
+		romanji: "basu",
+		katakana: "バス",
+		meaning: ["bus"],
+		level: "unknown"
+	},
+	{
+		romanji: "furaito",
+		katakana: "フライト",
+		meaning: ["flight", "fright"],
+		level: "unknown"
+	},
+	{
+		romanji: "paatii",
+		katakana: "パーティー",
+		meaning: ["party"],
+		level: "unknown"
+	},
+	{
+		romanji: "sofutowea",
+		katakana: "ソフトウェア",
+		meaning: ["software"],
+		level: "unknown"
+	},
+	{
+		romanji: "robotto",
+		katakana: "ロボット",
+		meaning: ["robot"],
+		level: "unknown"
+	},
+	{
+		romanji: "arerugii",
+		katakana: "アレルギー",
+		meaning: ["allergy"],
+		level: "unknown"
+	}
 ];
